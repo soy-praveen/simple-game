@@ -11,6 +11,7 @@
     <p>Click the button as fast as you can!</p>
     <button id="clickBtn">Click me!</button>
     <p id="score">Score: 0</p>
+    <p><strong>Tip:</strong> Open browser console and launch your attack 👾</p>
   </div>
 
   <script>
@@ -22,17 +23,6 @@
       score++;
       scoreDisplay.innerText = `Score: ${score}`;
     });
-
-    // DDoS console trigger
-    window.ddos = function() {
-      for (let i = 0; i < 100; i++) {
-        fetch("/log-action", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "ddos" })
-        });
-      }
-    };
   </script>
 </body>
 </html>
