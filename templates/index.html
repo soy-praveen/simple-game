@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DDoS Detection Game</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Click Game</h1>
+    <p>Click the button as fast as you can!</p>
+    <button id="clickBtn">Click me!</button>
+    <p id="score">Score: 0</p>
+  </div>
+
+  <script>
+    let score = 0;
+    const scoreDisplay = document.getElementById('score');
+    const clickBtn = document.getElementById('clickBtn');
+
+    clickBtn.addEventListener('click', () => {
+      score++;
+      scoreDisplay.innerText = `Score: ${score}`;
+    });
+
+    // DDoS console trigger
+    window.ddos = function() {
+      for (let i = 0; i < 100; i++) {
+        fetch("/log-action", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "ddos" })
+        });
+      }
+    };
+  </script>
+</body>
+</html>
